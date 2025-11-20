@@ -1,0 +1,106 @@
+{% load static %}
+{% include 'partials/header.html' %}
+
+<style>
+    footer{
+        margin-top: 30vh;
+    }
+</style>
+<section class="container py-5">
+    <h2 class="text-center mb-5"><i class="fa-solid fa-cart-shopping text-primary"></i> Votre Panier</h2>
+
+    <!-- Tableau du panier -->
+    <div class="table-responsive">
+        <table class="table align-middle text-center shadow-sm">
+            <thead class="table-warning">
+                <tr>
+                    <th>Produit</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Contenu du panier ajouté dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Résumé du panier -->
+    <div class="text-end mt-4">
+        <h4>Total Général : <span id="cart-total" class="text-success">0 FCFA</span></h4>
+        <a href="{% url 'shop:commande' %}"><button class="btn btn-primary mt-3"><i class="fa-solid fa-credit-card"></i> Passer la commande</button>
+        </div></a>
+</section>
+
+<script>
+// === Gestion du panier ===
+document.addEventListener("DOMContentLoaded", () => {
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotalDisplay = document.getElementById("cart-total");
+
+    // Récupérer le panier du localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Fonction pour afficher les produits du panier
+    function displayCart() {
+        cartItemsContainer.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><img src="${item.image}" alt="${item.name}" width="60" class="rounded"></td>
+                <td>${item.name}</td>
+                <td>${item.price.toLocaleString()} FCFA</td>
+                <td>
+                    <input type="number" min="1" value="${item.quantity}" class="form-control w-50 mx-auto quantity-input" data-index="${index}">
+                </td>
+                <td>${itemTotal.toLocaleString()} FCFA</td>
+                <td>
+                    <button class="btn btn-danger btn-sm remove-btn" data-index="${index}">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            cartItemsContainer.appendChild(row);
+        });
+
+        cartTotalDisplay.textContent = total.toLocaleString() + " FCFA";
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // Suppression d’un produit
+    cartItemsContainer.addEventListener("click", e => {
+        if (e.target.closest(".remove-btn")) {
+            const index = e.target.closest(".remove-btn").dataset.index;
+            cart.splice(index, 1);
+            displayCart();
+        }
+    });
+
+    // Mise à jour de la quantité
+    cartItemsContainer.addEventListener("input", e => {
+        if (e.target.classList.contains("quantity-input")) {
+            const index = e.target.dataset.index;
+            const newQuantity = parseInt(e.target.value);
+            if (newQuantity > 0) {
+                cart[index].quantity = newQuantity;
+                displayCart();
+            }
+        }
+    });
+
+    // Affichage initial
+    displayCart();
+});
+</script>
+<script src="{% static "js/panier.js" %}"></script>
+{% include 'partials/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* ===============================
+   VARIABLES GLOBALES
+================================ */
+:root {
+    --pastel-pink: #f8eaf0;
+    --pastel-cream: #fff7ec;
+    --accent: #ffb84d;
+    --muted: #6b6b6b;
+    --soft-blue: #97dff7;
+    --card-radius: 14px;
+    --transition-fast: 0.25s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fb;
+    overflow-x: hidden;
+}
+
+/* ===============================
+   LAYOUT DASHBOARD
+================================ */
+.admin-dashboard {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===============================
+   SIDEBAR DESKTOP
+================================ */
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--soft-blue);
+    padding: 1.5rem 1rem;
+    transition: all 0.3s ease;
+    z-index: 1050;
+}
+
+/* TITRE SIDEBAR */
+.sidebar h4 {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* LIENS */
+.sidebar .nav-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    transition: background var(--transition-fast);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar .collapse .nav-link {
+    padding-left: 30px;
+    font-size: 0.9rem;
+}
+
+/* Sidebar repliée desktop */
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed h4,
+.sidebar.collapsed .nav-link span,
+.sidebar.collapsed .admin-info h5 {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+}
+
+.sidebar.collapsed .admin-info img {
+    width: 40px;
+    height: 40px;
+}
+
+/* ===============================
+   ADMIN INFO
+================================ */
+.admin-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.admin-info h5 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* ===============================
+   CONTENU PRINCIPAL DESKTOP
+================================ */
+.content {
+    margin-left: 250px;
+    padding: 2rem;
+    flex: 1;
+    overflow-y: auto;
+    height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+/* Quand sidebar repliée */
+.sidebar.collapsed ~ .content {
+    margin-left: 70px !important;
+}
+
+/* ===============================
+   BOUTON TOGGLE (desktop)
+================================ */
+#toggleSidebar {
+    position: fixed;
+    top: 15px;
+    left: 260px;
+    z-index: 1100;
+    transition: left 0.3s ease;
+}
+
+.sidebar.collapsed ~ #toggleSidebar {
+    left: 80px !important;
+}
+
+/* ===============================
+   STAT CARDS
+================================ */
+.stat-card {
+    border: none;
+    border-radius: var(--card-radius);
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* ===============================
+   TABLES
+================================ */
+.table thead th {
+    background: var(--pastel-cream);
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.table img {
+    border-radius: 8px;
+}
+
+.table tbody tr:hover {
+    background: var(--pastel-pink);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn {
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer i {
+    transition: transform 0.2s ease;
+}
+
+.footer i:hover {
+    transform: scale(1.2);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+/* Petit écran (mobile) */
+@media (max-width: 992px) {
+
+    /* Sidebar devient cachée */
+    .sidebar {
+        left: -250px;
+        width: 250px !important;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    /* Le content prend toute la largeur */
+    .content {
+        margin-left: 0 !important;
+        padding-top: 80px;
+        width: 100%;
+    }
+
+    /* Toggle en position mobile */
+    #toggleSidebar {
+        left: 15px !important;
+        top: 15px;
+    }
+
+    /* On désactive le mode collapsed sur mobile */
+    .sidebar.collapsed {
+        width: 250px !important;
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 576px) {
+    .footer p { font-size: 12px; }
+    .footer i { font-size: 18px; }
+}

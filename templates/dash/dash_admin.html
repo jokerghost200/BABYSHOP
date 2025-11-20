@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<body>
+    <style>
+   /* Contenu principal */
+
+    </style>
+
+
+<!-- === Wrapper principal === -->
+<div class="admin-dashboard d-flex" id="adminDashboard">
+
+    <!-- === Sidebar === -->
+    {% include "partials/sidebar.html" %}
+
+    <!-- === Main Content === -->
+    <main class="content">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+            <h2>&nbsp;&nbsp;&nbsp;Tableau de bord</h2>
+            <div class="d-flex align-items-center mt-2 mt-md-0">
+                <input type="text" class="form-control w-auto me-3" placeholder="Recherche...">
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3 col-6">
+                <div class="card stat-card text-center p-3 shadow-sm">
+                    <i class="fa-solid fa-box fa-2x text-primary mb-2"></i>
+                    <h5>Produits</h5>
+                    <p class="fw-bold">128</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card stat-card text-center p-3 shadow-sm">
+                    <i class="fa-solid fa-cart-shopping fa-2x text-success mb-2"></i>
+                    <h5>Commandes</h5>
+                    <p class="fw-bold">54</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card stat-card text-center p-3 shadow-sm">
+                    <i class="fa-solid fa-users fa-2x text-info mb-2"></i>
+                    <h5>Clients</h5>
+                    <p class="fw-bold">213</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card stat-card text-center p-3 shadow-sm">
+                    <i class="fa-solid fa-euro-sign fa-2x text-warning mb-2"></i>
+                    <h5>Revenus</h5>
+                    <p class="fw-bold">125.000 FCFA</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste Produits -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Produits récents</h5>
+                <button class="btn btn-light btn-sm"><i class="fa-solid fa-plus"></i> Ajouter</button>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><img src="{% static 'img/body.jpg' %}" width="50" class="rounded"></td>
+                            <td>Body Bébé</td>
+                            <td>3.000 FCFA</td>
+                            <td>50</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><img src="{% static 'img/pyjama.jpg' %}" width="50" class="rounded"></td>
+                            <td>Pyjama Bébé</td>
+                            <td>5.000 FCFA</td>
+                            <td>30</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer class="footer mt-4 py-3 bg-light text-center shadow-sm rounded">
+    <div class="container">
+        <p class="mb-1 text-secondary small">
+            © {{ now|date:"Y" }} <strong>ATYI-STORE</strong>. Tous droits réservés.
+        </p>
+        <div>
+            <a href="#" class="text-decoration-none text-primary me-3"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="text-decoration-none text-info me-3"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="text-decoration-none text-danger"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

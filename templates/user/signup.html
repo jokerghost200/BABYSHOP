@@ -1,0 +1,130 @@
+{% load static %}
+{% include 'partials/header.html' %}
+
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fbd7cb, #97dff7);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .register-container {
+            max-width: 600px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            padding: 30px 40px;
+            margin: 80px auto;
+        }
+
+        .register-container h2 {
+            color: #1f1f1f;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-label { font-weight: 500; }
+
+        .btn-register {
+            background-color: #eabb0b;
+            border: none;
+            color: #000;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .btn-register:hover {
+            background-color: #97dff7;
+            color: #000;
+        }
+
+        .text-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .text-link a {
+            color: #1f4e8c;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .text-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<section>
+    <div class="register-container">
+        <h2><i class="fa-solid fa-user-plus text-warning"></i> Créer un compte</h2>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mt-2 fade-message">
+                    {{message}}
+                </div>
+                  
+                {% endfor %}
+              
+            {% endif %}
+        <form id="registerForm" method="post" action="{% url 'user:signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="prenom" class="form-label">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Votre prénom" required>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Adresse e-mail</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="exemple@gmail.com" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="ville" class="form-label">Ville</label>
+                    <input type="text" id="ville" name="ville" class="form-control" placeholder="Votre ville" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="adresse" class="form-label">Adresse</label>
+                    <input type="text" id="adresse" name="adresse" class="form-control" placeholder="Votre adresse" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="telephone" class="form-label">Téléphone</label>
+                    <input type="text" id="telephone" name="tel" class="form-control" placeholder="Votre numéro de téléphone" required>
+                </div>
+                <div class="col-md-12">
+
+                    <label for="photo" class="form-label">Photo de profil</label>
+                    <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
+                </div>
+                
+
+                <div class="col-md-12">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-register w-100 mt-4">
+                <i class="fa-solid fa-check"></i> S'inscrire
+            </button>
+        </form>
+
+        <div class="text-link">
+            <p>Déjà un compte ? <a href="{% url 'user:login' %}">Se connecter</a></p>
+        </div>
+    </div>
+</section>
+<script src="{% static "js/fade.js" %}"></script>
+
+{% include 'partials/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<div id="loader">
+    <svg class="baby-face-3d" width="120" height="120" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ombre / relief -->
+        <circle cx="32" cy="32" r="30" fill="url(#headGradient)" stroke="#eabb0b" stroke-width="1.5"/>
+        
+        <!-- Dégradé pour effet 3D -->
+        <defs>
+            <radialGradient id="headGradient" cx="32" cy="32" r="32" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fff0e0"/>
+                <stop offset="60%" stop-color="#ffe1d6"/>
+                <stop offset="100%" stop-color="#eabb0b"/>
+            </radialGradient>
+        </defs>
+
+        <!-- Yeux -->
+        <circle class="eye-left" cx="22" cy="28" r="4" fill="#333"/>
+        <circle class="eye-right" cx="42" cy="28" r="4" fill="#333"/>
+
+        <!-- Bouche -->
+        <path class="mouth" d="M22,42 Q32,42 42,42" stroke="#333" stroke-width="2" fill="transparent"/>
+    </svg>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+</div>
+
+<div id="content" style="display:none;">
+</div>
+
+<script src="{% static 'js/loader.js'%}"></script>

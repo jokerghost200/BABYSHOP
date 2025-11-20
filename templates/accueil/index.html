@@ -1,0 +1,405 @@
+{% load static %}
+
+{% include 'partials/header.html' %}
+{% include 'loader/loader.html' %}
+
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- Skip to content -->
+
+<!-- HERO -->
+<section class="hero" data-aos="zoom-in">
+  <div class="hero-inner">
+    <div class="eyebrow mb-2"><i class="fa-solid fa-baby-carriage me-2"></i> ATYI BABY SHOP</div>
+    <h1 class="display-5 fw-bold mb-3">
+      <span class="hero-anim-text" data-aos="fade-up" data-aos-delay="80">Des petites merveilles,</span>
+      <br>
+      <span class="hero-anim-text" data-aos="fade-up" data-aos-delay="160">pensées avec amour</span>
+    </h1>
+    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="240">Des layettes douces, des conseils experts et des coffrets cadeaux uniques.</p>
+
+    <div class="d-flex justify-content-center gap-2" data-aos="zoom-in" data-aos-delay="320">
+      <a href="{% url 'shop:catalogue' %}" class="btn btn-cta btn-lg me-2"><i class="fa-solid fa-store me-2"></i> Voir la boutique</a>
+      <a href="#our-universe" class="btn btn-outline-light btn-lg"><i class="fa-solid fa-info-circle me-2"></i> Notre univers</a>
+    </div>
+  </div>
+</section>
+
+<main id="main-content" class="mt-5">
+
+  <!-- PRODUITS POPULAIRES -->
+  <section class="container py-5" data-aos="fade-up">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="h4 section-title"><i class="fa-solid fa-star text-warning me-2"></i> Produits populaires</h2>
+      <a href="{% url 'shop:catalogue' %}" class="text-decoration-none">Voir tout →</a>
+    </div>
+
+    <div class="row g-4">
+      <!-- Example static products — replace with loop: for product in products -->
+      <div class="col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="50">
+        <div class="card product-card shadow-sm">
+          <img src="{% static 'img/body.jpg' %}" class="card-img-top" alt="Body coton bio">
+          <div class="card-body text-center">
+            <h5 class="card-title">Body coton bio</h5>
+            <p class="text-muted small">Confort quotidien — doux pour la peau</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#quickViewModal1"><i class="fa-solid fa-eye me-1"></i> Aperçu</button>
+              <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-cart-plus me-1"></i> Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="120">
+        <div class="card product-card shadow-sm">
+          <img src="{% static 'img/pyjama.jpg' %}" class="card-img-top" alt="Pyjama velours">
+          <div class="card-body text-center">
+            <h5 class="card-title">Pyjama velours</h5>
+            <p class="text-muted small">Chaud et doux pour la nuit</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#quickViewModal2"><i class="fa-solid fa-eye me-1"></i> Aperçu</button>
+              <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-cart-plus me-1"></i> Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="190">
+        <div class="card product-card shadow-sm">
+          <img src="{% static 'img/coffre.jpg' %}" class="card-img-top" alt="Coffret naissance">
+          <div class="card-body text-center">
+            <h5 class="card-title">Coffret naissance</h5>
+            <p class="text-muted small">Idée cadeau élégante</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#quickViewModal3"><i class="fa-solid fa-eye me-1"></i> Aperçu</button>
+              <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-cart-plus me-1"></i> Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick view modals -->
+  <div class="modal fade" id="quickViewModal1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img src="{% static 'img/body.jpg' %}" class="img-fluid" alt="Body coton bio">
+            </div>
+            <div class="col-md-6 p-4">
+              <h4>Body coton bio</h4>
+              <p class="text-muted small">Description douce et matières certifiées.</p>
+              <p class="fw-bold">Prix : 8 000 XAF</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary"><i class="fa-solid fa-cart-plus me-2"></i> Ajouter</button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick modal 2 -->
+  <div class="modal fade" id="quickViewModal2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img src="{% static 'img/pyjama.jpg' %}" class="img-fluid" alt="Pyjama velours">
+            </div>
+            <div class="col-md-6 p-4">
+              <h4>Pyjama velours</h4>
+              <p class="text-muted small">Idéal pour des nuits douces et chaudes.</p>
+              <p class="fw-bold">Prix : 9 500 XAF</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary"><i class="fa-solid fa-cart-plus me-2"></i> Ajouter</button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick modal 3 -->
+  <div class="modal fade" id="quickViewModal3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img src="{% static 'img/coffre.jpg' %}" class="img-fluid" alt="Coffret naissance">
+            </div>
+            <div class="col-md-6 p-4">
+              <h4>Coffret naissance</h4>
+              <p class="text-muted small">Un ensemble cadeau soigneusement présenté.</p>
+              <p class="fw-bold">Prix : 25 000 XAF</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary"><i class="fa-solid fa-cart-plus me-2"></i> Ajouter</button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR UNIVERSE -->
+  <section id="our-universe" class="container py-5 soft-bg" data-aos="fade-up">
+    <h2 class="text-center mb-4 section-title"><i class="fa-solid fa-heart text-warning me-2"></i> Notre Univers</h2>
+
+    <div class="row g-4 align-items-center">
+      <!-- left column with images -->
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="mb-3">
+          <h4 class="fw-bold">Idée directrice</h4>
+          <p class="text-muted">ATYI Baby Shop est plus qu’une boutique : un univers tendre, élégant et bienveillant, conçu pour aider les jeunes parents à faire les meilleurs choix.</p>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6" data-aos="zoom-in" data-aos-delay="80">
+            <div class="feature-card card shadow-sm">
+              <img src="{% static 'img/tendre.jpg' %}" alt="Tendresse">  {# put tendre.jpg #}
+              <div class="card-body">
+                <h6 class="mb-1">Tendresse</h6>
+                <p class="small text-muted mb-0">Chaque article choisi avec amour.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6" data-aos="zoom-in" data-aos-delay="160">
+            <div class="feature-card card shadow-sm">
+              <img src="{% static 'img/qualiter.jpg' %}" alt="Qualité"> {# put qualiter.jpg #}
+              <div class="card-body">
+                <h6 class="mb-1">Qualité</h6>
+                <p class="small text-muted mb-0">Tissus doux et durables.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right column with text features -->
+      <div class="col-lg-6" data-aos="fade-left">
+        <h5>Positionnement & Mission</h5>
+        <p class="text-muted">Un magasin chic mais accessible, spécialisé dans la layette et accessoires premium. Accompagnement humain, packs cadeaux personnalisés et conseils experts.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Produits soigneusement sélectionnés</li>
+          <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Présentation harmonieuse</li>
+          <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Service client attentionné</li>
+        </ul>
+
+        <hr>
+
+        <!-- Vision / Mission split -->
+        <div class="row">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="80">
+            <div class="p-3 bg-white rounded-3 shadow-sm">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon"><i class="fa-solid fa-eye fa-lg"></i></div>
+                <div>
+                  <h6 class="mb-1">Vision</h6>
+                  <p class="small text-muted mb-0">Créer un espace chaleureux et inspirant où chaque parent trouve tout le nécessaire pour le bien-être du bébé.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="160">
+            <div class="p-3 bg-white rounded-3 shadow-sm">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon"><i class="fa-solid fa-bullseye fa-lg"></i></div>
+                <div>
+                  <h6 class="mb-1">Mission</h6>
+                  <p class="small text-muted mb-0">Accompagner les jeunes mamans avec des produits de qualité et des conseils pratiques.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Experience client -->
+    <div class="row g-4 mt-4" data-aos="fade-up">
+      <div class="col-lg-4">
+        <div class="card h-100 shadow-sm p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="feature-icon"><i class="fa-solid fa-face-smile fa-lg text-warning"></i></div>
+            <div>
+              <h6 class="mb-1">Expérience client</h6>
+              <p class="small text-muted mb-0">Ambiance pastel, espace conseil, packs cadeaux et service attentionné.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card h-100 shadow-sm p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="feature-icon"><i class="fa-solid fa-box-open fa-lg text-warning"></i></div>
+            <div>
+              <h6 class="mb-1">Produits phares</h6>
+              <p class="small text-muted mb-0">Layettes, bodies, pyjamas, coffrets cadeaux et accessoires pratiques.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card h-100 shadow-sm p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="feature-icon"><i class="fa-solid fa-hand-holding-heart fa-lg text-success"></i></div>
+            <div>
+              <h6 class="mb-1">Valeurs</h6>
+              <p class="small text-muted mb-0">Tendresse, qualité et conseil personnalisé.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dimension digitale -->
+    <div class="row g-4 mt-4 align-items-center" data-aos="fade-up">
+      <div class="col-md-6">
+        <h5>Dimension digitale</h5>
+        <p class="text-muted">Nous prolongeons l’expérience en ligne avec une mini-boutique, conseils sur les réseaux et campagnes thématiques.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fa-brands fa-facebook me-2"></i> Facebook & Instagram inspirants</li>
+          <li class="mb-2"><i class="fa-solid fa-cart-shopping me-2"></i> Boutique en ligne</li>
+          <li class="mb-2"><i class="fa-solid fa-bullhorn me-2"></i> Campagnes autour des conseils maternité</li>
+        </ul>
+      </div>
+
+      <div class="col-md-6 text-center" data-aos="zoom-in">
+        <img src="{% static 'img/socials.jpg' %}" alt="Socials" class="img-fluid rounded-3 shadow-sm"> {# socials.jpg placeholder #}
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SLOGAN & CTA -->
+  <section class="container py-5" data-aos="fade-up">
+    <div class="row align-items-center g-4">
+      <div class="col-md-8">
+        <div class="brand-bubble p-4">
+          <h3 class="mb-2"><i class="fa-solid fa-quote-left me-2 text-secondary"></i> ATYI Baby Shop – Pour que chaque maman fasse le bon choix, avec amour</h3>
+          <p class="text-muted mb-0">Découvrez notre sélection, nos conseils et nos packs cadeaux pour accompagner les premiers instants de bébé.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end">
+        <a href="{% url 'shop:catalogue' %}" class="btn btn-cta btn-lg"><i class="fa-solid fa-store me-2"></i> Voir la boutique</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container py-5 soft-bg" data-aos="fade-up">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h4>Contactez-nous</h4>
+        <p class="text-muted">Située à Logbaba – Douala. Pour conseils, commandes ou packs cadeaux, contactez-nous :</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fa-solid fa-location-dot me-2 text-danger"></i> Logbaba, Douala</li>
+          <li class="mb-2"><i class="fa-brands fa-whatsapp me-2 text-success"></i> WhatsApp : <a href="https://wa.me/237690691287" class="text-decoration-none">690 69 12 87</a></li>
+          <li class="mb-2"><i class="fa-solid fa-envelope me-2 text-info"></i> Email : <a href="mailto:atyibabyshop@gmail.com" class="text-decoration-none">atyibabyshop@gmail.com</a></li>
+          <li class="mb-2"><i class="fa-brands fa-facebook me-2 text-primary"></i> Facebook : <span class="text-muted">@AtyiBabyShop</span></li>
+        </ul>
+        <div class="mt-3">
+          <a href="https://wa.me/237690691287" class="btn btn-success me-2"><i class="fa-brands fa-whatsapp me-2"></i> WhatsApp</a>
+          <a href="{% url 'accueil:contact' %}" class="btn btn-outline-secondary">Formulaire de contact</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="card shadow-sm p-3">
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Nom</label>
+              <input type="text" name="nom" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea name="message" rows="4" class="form-control" required></textarea>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-cta"><i class="fa-solid fa-paper-plane me-2"></i> Envoyer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- CTA strip -->
+<section class="py-4" style="background:linear-gradient(90deg,#fff7ec,#ffeedd);">
+  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+    <div>
+      <h5 class="mb-0">Besoin d’un conseil personnalisé ?</h5>
+      <small class="text-muted">Contactez-nous sur WhatsApp pour un accompagnement adapté.</small>
+    </div>
+    <div>
+      <a href="https://wa.me/237690691287" class="btn btn-success"><i class="fa-brands fa-whatsapp me-2"></i> WhatsApp</a>
+      <a href="{% url 'accueil:contact' %}" class="btn btn-outline-secondary ms-2">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- Floating CTA -->
+<a class="btn btn-warning float-cta rounded-circle p-3" href="{% url 'shop:catalogue' %}" title="Boutique">
+  <i class="fa-solid fa-store fa-lg"></i>
+</a>
+
+<!-- FOOTER -->
+{% include 'partials/footer.html' %}
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // Initialize AOS
+  AOS.init({ duration: 700, once: true, offset: 100 });
+
+  // Hero subtle zoom on scroll
+  (function(){
+    const hero = document.querySelector('.hero');
+    if(!hero) return;
+    window.addEventListener('scroll', () => {
+      const s = Math.min(1.06, 1 + window.scrollY / 1800);
+      hero.style.transform = `scale(${s})`;
+    });
+  })();
+
+  // Smooth scroll for anchor links
+  (function(){
+    const links = document.querySelectorAll('a[href^="#"]');
+    for(const link of links){
+      link.addEventListener('click', function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

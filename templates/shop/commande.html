@@ -1,0 +1,135 @@
+{% load static %}
+{% include 'partials/header.html' %}
+<section class="container py-5">
+    <h2 class="text-center mb-5"><i class="fa-solid fa-credit-card text-primary"></i> Passer la Commande</h2>
+
+    <div class="row g-5">
+        <!-- Résumé du panier -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-box"></i> Récapitulatif de la commande</h5>
+                </div>
+                <div class="card-body" id="order-summary">
+                    <p class="text-center text-muted">Chargement des produits...</p>
+                </div>
+                <div class="card-footer text-end">
+                    <h5>Total : <span id="order-total" class="text-success fw-bold">0 FCFA</span></h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire client -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-user"></i> Informations du client</h5>
+                </div>
+                <div class="card-body">
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom complet</label>
+                            <input type="text" id="name" class="form-control" placeholder="Entrez votre nom complet" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Adresse e-mail</label>
+                            <input type="email" id="email" class="form-control" placeholder="exemple@email.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Numéro de téléphone</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Ex : 690000000" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Adresse de livraison</label>
+                            <textarea id="address" class="form-control" rows="3" placeholder="Votre adresse complète" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mode de paiement</label>
+                            <select id="payment" class="form-select" required>
+                                <option value="">-- Sélectionnez un mode --</option>
+                                <option value="orange">Orange Money</option>
+                                <option value="mtn">MTN Mobile Money</option>
+                                <option value="livraison">Paiement à la livraison</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fa-solid fa-check-circle"></i> Confirmer la commande
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// === Chargement du résumé du panier ===
+document.addEventListener("DOMContentLoaded", () => {
+    const orderSummary = document.getElementById("order-summary");
+    const orderTotal = document.getElementById("order-total");
+    const checkoutForm = document.getElementById("checkout-form");
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function displayOrder() {
+        orderSummary.innerHTML = "";
+        let total = 0;
+
+        if (cart.length === 0) {
+            orderSummary.innerHTML = '<p class="text-center text-muted">Votre panier est vide.</p>';
+            return;
+        }
+
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            const div = document.createElement("div");
+            div.classList.add("d-flex", "justify-content-between", "border-bottom", "py-2");
+            div.innerHTML = `
+                <span><strong>${item.name}</strong> x ${item.quantity}</span>
+                <span>${itemTotal.toLocaleString()} FCFA</span>
+            `;
+            orderSummary.appendChild(div);
+        });
+
+        orderTotal.textContent = total.toLocaleString() + " FCFA";
+    }
+
+    // Validation du formulaire
+    checkoutForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const payment = document.getElementById("payment").value;
+
+        if (!cart.length) {
+            alert("Votre panier est vide !");
+            return;
+        }
+
+        if (!name || !email || !phone || !address || !payment) {
+            alert("Veuillez remplir tous les champs !");
+            return;
+        }
+
+        // Simuler l’envoi de commande
+        alert(`Merci ${name} ! Votre commande a été enregistrée avec succès 🎉`);
+        localStorage.removeItem("cart"); // Vider le panier
+        window.location.href = "/"; // Rediriger vers la page d’accueil ou catalogue
+    });
+
+    displayOrder();
+});
+</script>
+{% include 'partials/footer.html' %}
+</body>
+</html>

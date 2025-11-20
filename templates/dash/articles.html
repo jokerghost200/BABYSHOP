@@ -1,0 +1,100 @@
+{% load static %}
+
+<div class="admin-dashboard d-flex">
+    {% include "partials/sidebar.html" %}
+
+    <!-- Contenu principal -->
+    <main class="content flex-grow-1 p-4">
+
+        <!-- En-tête -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-secondary">
+                <i class="fa-solid fa-boxes-stacked text-warning"></i> Tous les articles
+            </h2>
+            <a href="{% url 'dashboard:ajouter_article' %}" class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-plus"></i> Ajouter un article
+            </a>
+        </div>
+
+        <!-- Tableau des articles -->
+        <div class="card shadow-sm border-0">
+            <div class="card-body table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-warning text-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Catalogue</th>
+                            <th>Prix</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in articles %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                {% if article.image %}
+                                    <img src="{{ article.image.url }}" width="60" height="60" class="rounded shadow-sm object-fit-cover">
+                                {% else %}
+                                    <div class="bg-light d-flex align-items-center justify-content-center rounded" style="width:60px; height:60px;">
+                                        <i class="fa-solid fa-image text-muted"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td class="fw-semibold">{{ article.nom }}</td>
+                            <td>{{ article.catalogue.nom }}</td>
+                            <td>{{ article.prix }} FCFA</td>
+                            <td>
+                                {% if article.stock > 10 %}
+                                    <span class="badge bg-success">{{ article.stock }}</span>
+                                {% elif article.stock > 0 %}
+                                    <span class="badge bg-warning text-dark">{{ article.stock }}</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Rupture</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'dashboard:modifier_article' article.id %}" class="btn btn-sm btn-warning">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="{% url 'dashboard:supprimer_article' article.id %}" class="btn btn-sm btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">
+                                Aucun article trouvé dans le catalogue.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'bootstrap-5/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/admin.js' %}"></script>
+
+<!-- Petit style supplémentaire -->
+<style>
+.content h2 {
+    font-weight: 700;
+}
+.table th {
+    font-weight: 600;
+}
+.object-fit-cover {
+    object-fit: cover;
+}
+.badge {
+    font-size: 0.85rem;
+}
+</style>

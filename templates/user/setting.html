@@ -1,0 +1,163 @@
+{% load static %}
+{% include 'partials/header.html' %}
+
+<style>
+  footer{
+      margin-top: 11vh;
+  }
+</style>
+
+<main class="settings-page container py-4">
+  <h2 class="mb-4"><i class="fa-solid fa-gear me-2"></i> Paramètres du compte</h2>
+
+  <!-- Section Profil -->
+
+  <div class="profile-settings d-flex align-items-center mb-4 gap-3">
+    {% if client.photo %}
+      <img src="{{ client.photo.url }}" alt="Photo de profil" class="rounded-circle border shadow-sm" width="120" height="120">
+    {% else %}
+      <i class="fa-solid fa-user-circle fa-2x me-2 text-secondary"></i>
+    {% endif %}
+
+
+<div>
+  <h4 class="fw-bold text-primary mb-1">{{ client.prenom }} {{ client.nom }}</h4>
+  <p class="text-muted small mb-2">{{ client.email }}</p>
+
+  <!-- Bouton Modifier le profil -->
+  <a href="{% url 'user:profile' %}" class="btn btn-outline-primary btn-sm mb-2">
+    <i class="fa-solid fa-pen me-1"></i> Modifier
+  </a>
+
+  <!-- Bouton Modifier le mot de passe -->
+  <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+    <i class="fa-solid fa-lock me-1"></i> Modifier le mot de passe
+  </button>
+</div>
+
+
+  </div>
+
+  <!-- Formulaire Paramètres -->
+
+  <form id="settingsForm" method="post" action="{% url 'user:setting_profile' %}" enctype="multipart/form-data" class="settings-form">
+    {% csrf_token %}
+    <div class="extra-settings-grid">
+      <!-- 1. Langue -->
+      <div class="setting-item">
+        <div><i class="fa-solid fa-globe me-2"></i> Langue</div>
+        <select id="langSelect" name="langue">
+          <option value="fr" {% if client.langue == 'fr' %}selected{% endif %}>Français</option>
+          <option value="en" {% if client.langue == 'en' %}selected{% endif %}>Anglais</option>
+        </select>
+      </div>
+
+  <!-- 2. Notifications -->
+  <div class="setting-item">
+    <div><i class="fa-solid fa-bell me-2"></i> Notifications</div>
+    <div class="form-check form-switch m-0">
+      <input id="notifSwitch" name="notifSwitch" class="form-check-input" type="checkbox" {% if client.notif_active %}checked{% endif %}>
+    </div>
+  </div>
+
+  <!-- 3. Thème sombre -->
+  <div class="setting-item theme-toggle">
+    <div><i class="fa-solid fa-moon me-2"></i> Thème sombre</div>
+    <div class="form-check form-switch m-0">
+      <input id="themeSwitch" name="themeSwitch" class="form-check-input" type="checkbox" {% if client.theme_sombre %}checked{% endif %}>
+    </div>
+  </div>
+
+  <!-- 4. Alertes e-mail -->
+  <div class="setting-item">
+    <div><i class="fa-solid fa-envelope me-2"></i> Alertes e-mail</div>
+    <div class="form-check form-switch m-0">
+      <input name="alertes_email" class="form-check-input" type="checkbox" {% if client.alertes_email %}checked{% endif %}>
+    </div>
+  </div>
+
+  <!-- 5. Mises à jour automatiques -->
+  <div class="setting-item">
+    <div><i class="fa-solid fa-download me-2"></i> Mises à jour automatiques</div>
+    <div class="form-check form-switch m-0">
+      <input name="maj_auto" class="form-check-input" type="checkbox" {% if client.maj_auto %}checked{% endif %}>
+    </div>
+  </div>
+
+  <!-- 6. Newsletter -->
+  <div class="setting-item">
+    <div><i class="fa-solid fa-newspaper me-2"></i> Recevoir newsletter</div>
+    <div class="form-check form-switch m-0">
+      <input name="newsletter" class="form-check-input" type="checkbox" {% if client.newsletter %}checked{% endif %}>
+    </div>
+  </div>
+
+  <!-- 7. Localisation -->
+  <div class="setting-item">
+    <div><i class="fa-solid fa-location-dot me-2"></i> Localisation</div>
+    <div class="form-check form-switch m-0">
+      <input name="localisation" class="form-check-input" type="checkbox" {% if client.localisation %}checked{% endif %}>
+    </div>
+  </div>
+
+  <!-- 8. Partage des données -->
+  <div class="setting-item">
+    <div><i class="fa-solid fa-database me-2"></i> Partage des données</div>
+    <div class="form-check form-switch m-0">
+      <input name="partage_donnees" class="form-check-input" type="checkbox" {% if client.partage_donnees %}checked{% endif %}>
+    </div>
+  </div>
+</div>
+
+<div class="action-buttons d-flex justify-content-center mt-4 gap-2">
+  <button type="submit" class="btn btn-primary">
+    <i class="fa-solid fa-floppy-disk me-1"></i> Enregistrer
+  </button>
+  <button type="button" class="btn btn-outline-secondary" id="cancelSettingsBtn">
+    <i class="fa-solid fa-xmark me-1"></i> Annuler
+  </button>
+</div>
+
+  </form>
+
+  <!-- Modal Changer le mot de passe -->
+
+  <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form method="post" action="{% url 'user:change_password' %}">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="fa-solid fa-lock me-2"></i> Changer le mot de passe</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body">
+            <label>Mot de passe actuel</label>
+            <input type="password" name="old_password" class="form-control mb-3" required>
+
+```
+        <label>Nouveau mot de passe</label>
+        <input type="password" name="new_password" class="form-control mb-3" required>
+
+        <label>Confirmer le mot de passe</label>
+        <input type="password" name="confirm_password" class="form-control" required>
+      </div>
+      <div class="modal-footer btn-actions">
+        <button type="button" id="cancelBtn" class="btn btn-outline-secondary fw-bold" data-bs-dismiss="modal">
+          <i class="fa-solid fa-xmark me-1"></i> Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+  </div>
+</main>
+
+{% include 'partials/footer.html' %}
+
+<!-- JS pour paramètres et mode sombre -->
+
+<script src="{% static 'js/option.js' %}"></script>

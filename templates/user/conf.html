@@ -1,0 +1,139 @@
+{% load static %}
+<style>
+    body {
+        background: linear-gradient(135deg, #f0f8ff, #ffffff);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* centre verticalement le main */
+    }
+
+    main {
+        flex: 1; /* prend l'espace disponible */
+        display: flex;
+        justify-content: center; /* centre horizontalement */
+        align-items: center;     /* centre verticalement si nécessaire */
+        padding: 2rem 0;         /* petit padding top/bottom */
+    }
+
+    .card-privacy {
+        border-radius: 1rem;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+    }
+
+    .card-privacy:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .fixed-footer {
+    background-color: var(--soft-blue);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3rem;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    }
+
+    .toggle-content {
+        display: none;
+        margin-top: 0.5rem;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .toggle-header {
+        cursor: pointer;
+    }
+
+    .toggle-header i {
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-header.collapsed i {
+        transform: rotate(0deg);
+    }
+
+    .toggle-header.expanded i {
+        transform: rotate(180deg);
+    }
+</style>
+
+<body>
+    {% include 'partials/header.html' %}
+
+    <main class="container">
+        <div class="row justify-content-center w-100">
+            <div class="col-md-10 col-lg-8">
+                <div class="text-center section-header mb-4">
+                    <h2 class="fw-bold text-primary">Paramètres de Confidentialité</h2>
+                    <p class="text-muted small">Gérez vos préférences et les informations que vous partagez</p>
+                </div>
+
+                <!-- Cards (comme avant) -->
+                <div class="card card-privacy p-4 mb-3">
+                    <div class="toggle-header d-flex justify-content-between align-items-center collapsed" onclick="toggleContent(this)">
+                        <span><i class="fa-solid fa-user-shield me-2"></i>Visibilité du profil</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="toggle-content">
+                        Vous pouvez contrôler qui voit votre profil et vos informations personnelles. Configurez les options pour rendre votre profil public ou privé.
+                    </div>
+                </div>
+
+                <div class="card card-privacy p-4 mb-3">
+                    <div class="toggle-header d-flex justify-content-between align-items-center collapsed" onclick="toggleContent(this)">
+                        <span><i class="fa-solid fa-lock me-2"></i>Sécurité du compte</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="toggle-content">
+                        Activez l'authentification à deux facteurs et changez régulièrement votre mot de passe pour sécuriser votre compte.
+                    </div>
+                </div>
+
+                <div class="card card-privacy p-4 mb-3">
+                    <div class="toggle-header d-flex justify-content-between align-items-center collapsed" onclick="toggleContent(this)">
+                        <span><i class="fa-solid fa-envelope me-2"></i>Notifications et emails</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="toggle-content">
+                        Choisissez les types de notifications que vous souhaitez recevoir.
+                    </div>
+                </div>
+
+                <div class="card card-privacy p-4 mb-3">
+                    <div class="toggle-header d-flex justify-content-between align-items-center collapsed" onclick="toggleContent(this)">
+                        <span><i class="fa-solid fa-database me-2"></i>Données personnelles</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="toggle-content">
+                        Gérez les informations personnelles que vous fournissez à ATYI BABY SHOP.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'partials/footer.html' %}
+<script>
+    function toggleContent(element) {
+        const content = element.nextElementSibling;
+        const isCollapsed = element.classList.contains('collapsed');
+
+        if (isCollapsed) {
+            content.style.display = 'block';
+            element.classList.remove('collapsed');
+            element.classList.add('expanded');
+        } else {
+            content.style.display = 'none';
+            element.classList.remove('expanded');
+            element.classList.add('collapsed');
+        }
+    }
+</script>
+
+</body>

@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - KidStore</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap-5/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-6.7.2-web/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+</head>
+
+<body>
+
+<div class="admin-dashboard d-flex">
+
+    <!-- === SIDEBAR === -->
+    <nav class="sidebar bg-primary text-white p-3 flex-column flex-shrink-0">
+        <h4 class="mb-4 text-center"><i class="fa-solid fa-baby"></i> ATYI-STORE</h4>
+
+        <!-- === Admin Info === -->
+        <div class="admin-info">
+            {% if user.photo %}
+                <img src="{{ user.photo.url }}" alt="Photo Admin">
+            {% else %}
+                <i class="fa-solid fa-user-circle fa-4x"></i>
+            {% endif %}
+            <h5>{{ user.prenom }} {{ user.nom }}</h5>
+        </div>
+
+        <!-- === MENU === -->
+        <ul class="nav flex-column">
+
+            <!-- Tableau de bord -->
+            <li class="nav-item">
+                <a href="{% url 'dashboard:dash' %}" class="nav-link text-white d-flex align-items-center">
+                    <i class="fa-solid fa-chart-line me-2"></i> <span>Tableau de bord</span>
+                </a>
+            </li>
+
+            <!-- Articles / Catalogue -->
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse" href="#submenuArticles" role="button">
+                    <span><i class="fa-solid fa-box me-2"></i> Articles</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="collapse" id="submenuArticles">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'dashboard:articles' %}">Tous les articles</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'dashboard:ajouter_article' %}">Ajouter un article</a></li>
+                       <!-- <li class="nav-item"><a class="nav-link text-white" href="#">Catalogue</a></li>-->
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Commandes -->
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white d-flex align-items-center">
+                    <i class="fa-solid fa-shopping-cart me-2"></i> <span>Commandes</span>
+                </a>
+            </li>
+
+            <!-- Clients -->
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white d-flex align-items-center">
+                    <i class="fa-solid fa-users me-2"></i> <span>Clients</span>
+                </a>
+            </li>
+
+            <!-- Paramètres -->
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white d-flex align-items-center">
+                    <i class="fa-solid fa-gear me-2"></i> <span>Paramètres</span>
+                </a>
+            </li>
+
+            <!-- Déconnexion -->
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex align-items-center" href="{% url 'user:logout' %}">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i> <span>Déconnexion</span>
+                </a>
+            </li>
+        </ul>
+       
+    </nav>
+   
+    
+    <!-- === CONTENU PRINCIPAL === -->
+    <main>
+        <button id="toggleSidebar" class="btn btn-outline-primary mb-3">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    
+    </main>
+</div>
+
+<script src="{% static 'bootstrap-5/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+   const toggleBtn = document.getElementById("toggleSidebar");
+const sidebar = document.querySelector(".sidebar");
+const articlesLink = document.querySelector('[href="#submenuArticles"]'); // correction du nom
+
+// === Toggle sidebar ===
+toggleBtn.addEventListener("click", () => {
+    if (window.innerWidth <= 992) {
+        // Mode mobile : sidebar coulissante
+        sidebar.classList.toggle("active");
+        document.body.classList.toggle("sidebar-open");
+    } else {
+        // Mode desktop : sidebar pliable
+        sidebar.classList.toggle("collapsed");
+
+        // ✅ Si on replie la sidebar -> fermer tous les sous-menus ouverts
+        if (sidebar.classList.contains("collapsed")) {
+            document.querySelectorAll(".collapse.show").forEach(menu => {
+                const collapse = bootstrap.Collapse.getInstance(menu);
+                if (collapse) collapse.hide();
+                else new bootstrap.Collapse(menu, { toggle: false }).hide();
+            });
+        }
+    }
+});
+
+// === Fermer sidebar si clic à l’extérieur sur mobile ===
+document.addEventListener("click", (e) => {
+    if (window.innerWidth <= 992 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+        sidebar.classList.remove("active");
+        document.body.classList.remove("sidebar-open");
+    }
+});
+
+// === Quand on clique sur "Articles" et que la sidebar est repliée ===
+if (articlesLink) {
+    articlesLink.addEventListener("click", (e) => {
+        const isCollapsed = sidebar.classList.contains("collapsed");
+        if (isCollapsed && window.innerWidth > 992) {
+            e.preventDefault(); // Empêche le collapse immédiat
+            sidebar.classList.remove("collapsed");
+
+            // ✅ Après un petit délai, ouvre le sous-menu Articles
+            setTimeout(() => {
+                const submenu = new bootstrap.Collapse(document.getElementById("submenuArticles"), {
+                    show: true
+                });
+            }, 300);
+        }
+    });
+}
+
+    </script>
+    
+
+</body>
+</html>

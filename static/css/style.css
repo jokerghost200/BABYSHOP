@@ -1,0 +1,505 @@
+/* ===============================
+🌸 ATYI BABY SHOP — STYLE GLOBAL
+=============================== */
+
+:root {
+    --pastel-pink: #f8eaf0;
+    --pastel-cream: #fff7ec;
+    --accent: #ffb84d;
+    --muted: #6b6b6b;
+    --soft-blue: #97dff7;
+    --card-radius: 14px;
+    --transition-fast: 0.25s ease;
+    }
+    
+    body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffffff, #fdf6f9);
+    color: #333;
+    padding-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    }
+    
+    /* ===============================
+    HEADER
+    =============================== */
+    
+    header {
+    background-color: #fbd7cb;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 1030;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background 0.3s ease;
+    }
+    header.scrolled {
+    background-color: #fff7ec;
+    }
+    
+    .logo {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    }
+    
+    .shop-name {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #1f1f1f;
+    }
+    
+    .nav-link {
+    color: #1f1f1f;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    }
+    .nav-link:hover {
+    color: var(--accent);
+    }
+    .nav-link i { margin-right: 6px; }
+    
+    /* Profil miniature */
+    .profile-thumb {
+    width: 35px; height: 35px; object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: transform .2s ease;
+    }
+    .profile-thumb:hover { transform: scale(1.1); }
+    
+    /* ===============================
+    HERO
+    =============================== */
+    
+    .hero {
+    min-height: 85vh;
+    background-image: url("{% static 'img/baby-hero-1.jpg' %}");
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; text-align: center;
+    overflow: hidden;
+    }
+    .hero::after {
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(6,6,10,0.2), rgba(6,6,10,0.5));
+    }
+    .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1100px;
+    padding: 2rem;
+    animation: fadeIn 1.5s ease-out;
+    }
+    .hero h1 { font-weight: 700; animation: floatText 3s ease-in-out infinite; }
+    .hero .eyebrow { letter-spacing: 2px; text-transform: uppercase; font-weight:600; opacity:.95; }
+    
+    .btn-cta {
+    background: linear-gradient(90deg,#ffb84d,#ff9a8a);
+    border: none; color: #fff;
+    box-shadow: 0 8px 20px rgba(255,160,90,0.25);
+    transition: transform .2s;
+    }
+    .btn-cta:hover { transform: scale(1.05); }
+    
+    .hero-dots {
+    position:absolute; inset:auto 0 0 0; height:140px;
+    background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 1px, transparent 1px),
+    radial-gradient(circle at 70% 70%, rgba(255,255,255,0.3) 1px, transparent 1px);
+    background-size: 30px 30px; opacity:.1;
+    }
+    
+    /* ===============================
+    PRODUITS POPULAIRES
+    =============================== */
+    
+    .product-card {
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    background: #fff;
+    }
+    .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .product-card img {
+    height: 240px; object-fit: cover;
+    transition: transform 0.4s ease;
+    }
+    .product-card:hover img {
+    transform: scale(1.08);
+    }
+    .product-card .card-body { padding: 1.2rem; }
+    .product-card h5 { font-weight: 600; color:#333; }
+    
+    /* ===============================
+    SECTION — NOTRE UNIVERS
+    =============================== */
+    
+    .feature-card {
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: transform .25s, box-shadow .25s;
+    }
+    .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+    .feature-card img {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+    }
+    .feature-card .card-body {
+    text-align: center;
+    padding: 1rem;
+    }
+    .feature-card h6 {
+    font-weight: 600;
+    color: #333;
+    }
+    
+    /* ===============================
+    CTA STRIP & WHATSAPP
+    =============================== */
+    
+    .cta-strip {
+    background: linear-gradient(90deg,#fff7ec,#ffeedd);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .btn-success {
+    background-color: #25d366;
+    border: none;
+    }
+    .btn-success:hover {
+    background-color: #20b959;
+    }
+    
+    /* Floating bouton vers la boutique */
+    .float-cta {
+    position: fixed; right:20px; bottom:20px;
+    z-index:1200;
+    background: linear-gradient(135deg, #ffb84d, #ff9a8a);
+    color: #fff;
+    border:none;
+    width: 60px; height: 60px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    box-shadow: 0 10px 20px rgba(255,160,90,0.25);
+    transition: transform .25s ease;
+    }
+    .float-cta:hover {
+    transform: translateY(-8px) rotate(-8deg);
+    }
+    
+    /* ===============================
+    LOADER (écran de chargement)
+    =============================== */
+    
+    #loader {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #fbd7cb, #97dff7);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    z-index: 9999;
+    }
+    .baby-face-3d {
+    filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3));
+    animation: floatBaby 2.5s ease-in-out infinite;
+    }
+    .progress-bar-container {
+    width: 60%;
+    height: 12px;
+    background: #ffe1d6;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 20px;
+    }
+    .progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #eabb0b;
+    border-radius: 6px;
+    transition: width 0.03s linear;
+    }
+    
+    /* ===============================
+    FOOTER
+    =============================== */
+    
+    footer {
+    background-color: var(--soft-blue);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3rem;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    }
+    
+    /* ===============================
+    ANIMATIONS
+    =============================== */
+    
+    @keyframes floatBaby {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes floatText {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    }
+    
+    @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ===============================
+    RESPONSIVE
+    =============================== */
+    
+    @media (max-width: 991px) {
+    .navbar .d-none.d-lg-inline { display: none !important; }
+    }
+    
+    @media (max-width: 576px) {
+    .hero { min-height: 60vh; }
+    .product-card img { height: 160px; }
+    }
+/* ===============================
+⚙️ PARAMÈTRES SUPPLÉMENTAIRES
+=============================== */
+
+/* Section paramètres généraux */
+.settings-section .setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background-color: #fafafa;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    }
+    .settings-section .setting-item:hover {
+    background-color: #fff7ec;
+    transform: translateX(3px);
+    box-shadow: 0 5px 15px rgba(255,184,77,0.1);
+    }
+    .settings-section .setting-item i {
+    width: 28px;
+    font-size: 1.2rem;
+    color: var(--accent, #ffb84d);
+    }
+    
+    /* Inputs et select toujours actifs pour paramètre PC */
+    .settings-form input,
+    .settings-form select {
+    background-color: #fff;
+    cursor: text;
+    }
+    
+    /* Toggle switches */
+    .form-check-input {
+    cursor: pointer;
+    }
+    
+    /* Sections supplémentaires visuelles */
+    .setting-category-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #555;
+    margin: 1.5rem 0 0.8rem 0;
+    }
+    
+    /* Exemple de 15+ paramètres */
+    .setting-item.extra {
+    background-color: #fdf5f0;
+    }
+    
+    /* Hover effet doux */
+    .setting-item.extra:hover {
+    background-color: #ffe5cc;
+    }
+    
+    /* Responsive pour écran PC large */
+    @media (min-width: 992px) {
+    .settings-page {
+    max-width: 1200px;
+    }
+    .profile-settings img {
+    width: 130px;
+    height: 130px;
+    }
+    .upload-btn {
+    padding: 0.9rem 1.6rem;
+    }
+    .action-buttons .btn {
+    padding: 0.85rem 1.8rem;
+    }
+    }
+    
+    /* Media queries PC et tablette */
+    @media (max-width: 991px) {
+    .settings-page {
+    margin: 70px 1rem;
+    }
+    }
+    
+    /* ===============================
+    Exemple d’options supplémentaires
+    =============================== */
+    
+    .extra-settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    }
+    
+    .extra-settings-grid .setting-item {
+    padding: 14px 18px;
+    border-radius: 14px;
+    background-color: #fff8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    }
+    
+    .extra-settings-grid .setting-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,184,77,0.15);
+    }
+    
+    /* Pour 15+ paramètres, on peut ajouter des badges, icônes ou indicateurs */
+    .setting-item .badge {
+    background-color: var(--accent, #ffb84d);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 8px;
+    }
+    .theme-toast, .notif-toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--bs-dark);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        opacity: 0;
+        animation: fadeInOut 2.5s ease;
+        z-index: 2000;
+    }
+    .theme-toast i, .notif-toast i { color: gold; }
+    
+    .setting-item.modified {
+        background-color: rgba(0, 123, 255, 0.1);
+        transition: background-color 0.8s ease;
+    }
+    
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(10px); }
+        10%, 90% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(10px); }
+    }
+    .save-toast {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #28a745;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 3000;
+        animation: fadeInOut 3s ease;
+    }
+    .save-toast i { color: #fff; }
+    
+    .theme-toast, .notif-toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--bs-dark, #333);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        opacity: 0;
+        animation: fadeInOut 2.5s ease;
+        z-index: 2000;
+    }
+    
+    .setting-item.modified {
+        background-color: rgba(0, 123, 255, 0.1);
+        transition: background-color 0.8s ease;
+    }
+    
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(-10px); }
+        10%, 90% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+    }
+/* Centrage des boutons du footer du modal */
+/* FORCER centrage modal-footer (règles très spécifiques + !important) */
+/* ✅ Correction finale — Centrage parfait du footer dans le modal */
+.modal.show .modal-dialog .modal-content .modal-footer.btn-actions,
+.modal .modal-dialog .modal-content .modal-footer.btn-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 14px !important;
+  border-top: none !important;
+  padding: 16px 0 10px !important;
+  text-align: center !important;
+  flex-wrap: wrap !important;
+}
+
+/* (Optionnel) Ajout d’un petit effet d’apparition sur les boutons */
+.modal-footer.btn-actions .btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.modal-footer.btn-actions .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+body.dark {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark .setting-item {
+    background-color: #1e1e1e;
+    color: #eee;
+}
+
+/* Ajuste les autres éléments (boutons, inputs, etc.) pour le thème sombre */
+body.dark input,
+body.dark select,
+body.dark button {
+    background-color: #2a2a2a;
+    color: #eee;
+}
+

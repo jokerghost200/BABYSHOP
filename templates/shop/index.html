@@ -1,0 +1,122 @@
+{% load static %}
+{% include 'partials/header.html' %}
+<style>
+    .article-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+.article-card img {
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.article-card:hover img { transform: scale(1.05); }
+
+.add-to-cart { transition: 0.3s ease; }
+.add-to-cart:hover { transform: translateY(-2px) scale(1.05); }
+
+@media(max-width: 768px){ .article-card img { height: 200px; } }
+@media(max-width: 576px){ .search-bar { width: 100%; margin-top: 1rem; } }
+
+</style>
+
+<section class="container py-5 mt-5">
+    <h2 class="text-center mb-5">
+        <i class="fa-solid fa-baby text-warning"></i> Catalogue des Articles
+    </h2>
+
+    <!-- Barre de recherche + filtres dynamiques -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-warning category-btn" data-category="all">Tous</button>
+            {% for cat in categories %}
+            <button class="btn btn-outline-warning category-btn" data-category="{{ cat.slug }}">{{ cat.nom }}</button>
+            {% endfor %}
+        </div>
+
+        <div class="input-group search-bar mt-3 mt-md-0" style="max-width: 300px;">
+            <span class="input-group-text bg-warning text-white">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un article...">
+        </div>
+    </div>
+
+    <!-- Grille des articles -->
+    <div class="row g-4" id="article-grid">
+        {% for article in articles %}
+        <div class="col-md-4 article-item" data-category="{{ article.categorie.slug }}" data-name="{{ article.nom }}">
+            <div class="card article-card h-100">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.nom }}">
+                {% else %}
+                    <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="{{ article.nom }}">
+                {% endif %}
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ article.nom }}</h5>
+                    <p class="card-text text-muted">{{ article.description|truncatewords:15 }}</p>
+                    <button class="btn btn-primary add-to-cart" data-id="{{ article.id }}">
+                        <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-secondary">Aucun article trouvé.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% include 'partials/footer.html' %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const categoryButtons = document.querySelectorAll(".category-btn");
+        const articleItems = document.querySelectorAll(".article-item");
+        const searchInput = document.getElementById("searchInput");
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        const cartCount = document.getElementById("cart-count");
+        let count = 0;
+    
+        // Filtre par catégorie
+        categoryButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                categoryButtons.forEach(b => b.classList.remove("btn-warning"));
+                categoryButtons.forEach(b => b.classList.add("btn-outline-warning"));
+                btn.classList.remove("btn-outline-warning");
+                btn.classList.add("btn-warning");
+                const category = btn.dataset.category;
+                articleItems.forEach(item => {
+                    item.style.display = (category === "all" || item.dataset.category === category) ? "block" : "none";
+                });
+            });
+        });
+    
+        // Recherche article
+        searchInput.addEventListener("keyup", () => {
+            const query = searchInput.value.toLowerCase();
+            articleItems.forEach(item => {
+                const name = item.dataset.name.toLowerCase();
+                item.style.display = name.includes(query) ? "block" : "none";
+            });
+        });
+    
+        // Ajouter au panier
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                count++;
+                if(cartCount) {
+                    cartCount.textContent = count;
+                    cartCount.classList.add("animate__animated", "animate__bounce");
+                    setTimeout(() => { cartCount.classList.remove("animate__animated", "animate__bounce"); }, 600);
+                }
+            });
+        });
+    });
+    </script>
+    
