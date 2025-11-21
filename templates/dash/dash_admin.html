@@ -1,18 +1,7 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-
 <body>
-    <style>
-   /* Contenu principal */
-
-    </style>
-
-
 <!-- === Wrapper principal === -->
 <div class="admin-dashboard d-flex" id="adminDashboard">
-
-    <!-- === Sidebar === -->
     {% include "partials/sidebar.html" %}
 
     <!-- === Main Content === -->
@@ -103,7 +92,15 @@
         </div>
     </main>
 </div>
+<script>
+const sidebar = document.querySelector(".sidebar");
+const dashboard = document.getElementById("adminDashboard");
 
+document.getElementById("toggleSidebar").addEventListener("click", () => {
+    sidebar.classList.toggle("collapsed");
+    dashboard.classList.toggle("sidebar-collapsed");
+});
+</script>
 <footer class="footer mt-4 py-3 bg-light text-center shadow-sm rounded">
     <div class="container">
         <p class="mb-1 text-secondary small">
@@ -116,8 +113,3 @@
         </div>
     </div>
 </footer>
-
-
-
-</body>
-</html>

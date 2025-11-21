@@ -16,9 +16,6 @@
 </head>
 
 <body>
-
-<div class="admin-dashboard d-flex">
-
     <!-- === SIDEBAR === -->
     <nav class="sidebar bg-primary text-white p-3 flex-column flex-shrink-0">
         <h4 class="mb-4 text-center"><i class="fa-solid fa-baby"></i> ATYI-STORE</h4>
@@ -89,20 +86,13 @@
         </ul>
        
     </nav>
-   
-    
-    <!-- === CONTENU PRINCIPAL === -->
-    <main>
         <button id="toggleSidebar" class="btn btn-outline-primary mb-3">
             <i class="fa-solid fa-bars"></i>
         </button>
-    
-    </main>
-</div>
-
+        
 <script src="{% static 'bootstrap-5/js/bootstrap.bundle.min.js' %}"></script>
 <script>
-   const toggleBtn = document.getElementById("toggleSidebar");
+const toggleBtn = document.getElementById("toggleSidebar");
 const sidebar = document.querySelector(".sidebar");
 const articlesLink = document.querySelector('[href="#submenuArticles"]'); // correction du nom
 
@@ -152,6 +142,26 @@ if (articlesLink) {
         }
     });
 }
+// === Sidebar hover desktop ===
+if (window.innerWidth > 992) {
+    sidebar.addEventListener("mouseenter", () => {
+        sidebar.classList.add("expanded");
+        sidebar.classList.remove("collapsed");
+    });
+
+    sidebar.addEventListener("mouseleave", () => {
+        sidebar.classList.remove("expanded");
+        sidebar.classList.add("collapsed");
+
+        // fermer tous les sous-menus ouverts
+        document.querySelectorAll(".collapse.show").forEach(menu => {
+            const collapse = bootstrap.Collapse.getInstance(menu);
+            if (collapse) collapse.hide();
+            else new bootstrap.Collapse(menu, { toggle: false }).hide();
+        });
+    });
+}
+
 
     </script>
     

@@ -5,7 +5,7 @@
     --pastel-pink: #f8eaf0;
     --pastel-cream: #fff7ec;
     --accent: #ffb84d;
-    --muted: #6b6b6b;
+    --muted: #6b6b5;
     --soft-blue: #97dff7;
     --card-radius: 14px;
     --transition-fast: 0.25s ease;
@@ -77,6 +77,21 @@ body {
     width: 70px;
 }
 
+/* Sidebar ouverte au hover */
+.sidebar.expanded {
+    width: 250px;
+}
+
+.sidebar.expanded h4,
+.sidebar.expanded .nav-link span,
+.sidebar.expanded .admin-info h5 {
+    display: block;
+}
+
+.sidebar.expanded .nav-link {
+    justify-content: flex-start;
+}
+
 .sidebar.collapsed h4,
 .sidebar.collapsed .nav-link span,
 .sidebar.collapsed .admin-info h5 {
@@ -124,13 +139,19 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-/* Quand sidebar repliée */
-.sidebar.collapsed ~ .content {
+/*** FIX PRINCIPAL ***/
+/* Sidebar fermée */
+.admin-dashboard.sidebar-collapsed .content {
     margin-left: 70px !important;
 }
 
+/* Sidebar ouverte */
+.admin-dashboard:not(.sidebar-collapsed) .content {
+    margin-left: 250px !important;
+}
+
 /* ===============================
-   BOUTON TOGGLE (desktop)
+   BOUTON TOGGLE
 ================================ */
 #toggleSidebar {
     position: fixed;
@@ -140,7 +161,7 @@ body {
     transition: left 0.3s ease;
 }
 
-.sidebar.collapsed ~ #toggleSidebar {
+.admin-dashboard.sidebar-collapsed #toggleSidebar {
     left: 80px !important;
 }
 
@@ -211,11 +232,8 @@ body {
 /* ===============================
    RESPONSIVE
 ================================ */
-
-/* Petit écran (mobile) */
 @media (max-width: 992px) {
 
-    /* Sidebar devient cachée */
     .sidebar {
         left: -250px;
         width: 250px !important;
@@ -225,26 +243,22 @@ body {
         left: 0;
     }
 
-    /* Le content prend toute la largeur */
     .content {
         margin-left: 0 !important;
         padding-top: 80px;
         width: 100%;
     }
 
-    /* Toggle en position mobile */
     #toggleSidebar {
         left: 15px !important;
         top: 15px;
     }
 
-    /* On désactive le mode collapsed sur mobile */
     .sidebar.collapsed {
         width: 250px !important;
     }
 }
 
-/* Très petits écrans */
 @media (max-width: 576px) {
     .footer p { font-size: 12px; }
     .footer i { font-size: 18px; }
