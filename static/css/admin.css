@@ -5,7 +5,7 @@
     --pastel-pink: #f8eaf0;
     --pastel-cream: #fff7ec;
     --accent: #ffb84d;
-    --muted: #6b6b5;
+    --muted: #6b6b6b;
     --soft-blue: #97dff7;
     --card-radius: 14px;
     --transition-fast: 0.25s ease;
@@ -27,7 +27,7 @@ body {
 }
 
 /* ===============================
-   SIDEBAR DESKTOP
+   SIDEBAR
 ================================ */
 .sidebar {
     width: 250px;
@@ -49,7 +49,25 @@ body {
     text-align: center;
 }
 
-/* LIENS */
+/* ADMIN INFO */
+.admin-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.admin-info h5 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* MENU LIENS */
 .sidebar .nav-link {
     display: flex;
     justify-content: space-between;
@@ -72,24 +90,13 @@ body {
     font-size: 0.9rem;
 }
 
-/* Sidebar repliée desktop */
+/* SIDEBAR COLLAPSÉ */
 .sidebar.collapsed {
     width: 70px;
 }
 
-/* Sidebar ouverte au hover */
 .sidebar.expanded {
     width: 250px;
-}
-
-.sidebar.expanded h4,
-.sidebar.expanded .nav-link span,
-.sidebar.expanded .admin-info h5 {
-    display: block;
-}
-
-.sidebar.expanded .nav-link {
-    justify-content: flex-start;
 }
 
 .sidebar.collapsed h4,
@@ -108,27 +115,7 @@ body {
 }
 
 /* ===============================
-   ADMIN INFO
-================================ */
-.admin-info {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.admin-info img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.admin-info h5 {
-    margin-top: 10px;
-    font-size: 16px;
-}
-
-/* ===============================
-   CONTENU PRINCIPAL DESKTOP
+   CONTENU PRINCIPAL
 ================================ */
 .content {
     margin-left: 250px;
@@ -139,15 +126,9 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-/*** FIX PRINCIPAL ***/
-/* Sidebar fermée */
+/* Sidebar repliée */
 .admin-dashboard.sidebar-collapsed .content {
     margin-left: 70px !important;
-}
-
-/* Sidebar ouverte */
-.admin-dashboard:not(.sidebar-collapsed) .content {
-    margin-left: 250px !important;
 }
 
 /* ===============================

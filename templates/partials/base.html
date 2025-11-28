@@ -1,10 +1,30 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard Admin{% endblock %}</title>
 
-      <ul class="sidebar-menu list-unstyled mt-4">
-        <li><a href="#"><i class="fas fa-tachometer-alt me-2"></i> Tableau de bord</a></li>
-        <li><a href="#"><i class="fas fa-box me-2"></i> Produits</a></li>
-        <li><a href="#"><i class="fas fa-shopping-cart me-2"></i> Commandes</a></li>
-        <li><a href="#"><i class="fas fa-users me-2"></i> Utilisateurs</a></li>
-        <li><a href="#"><i class="fas fa-cog me-2"></i> Paramètres</a></li>
-      </ul>
-    </nav>
+    <link rel="stylesheet" href="{% static 'bootstrap-5/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-6.7.2-web/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+
+<div class="admin-dashboard d-flex" id="adminDashboard">
+
+    {% include "partials/sidebar.html" %}
+
+    <!-- Contenu principal -->
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</div>
+
+<script src="{% static 'bootstrap-5/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/admin.js' %}"></script>
+</body>
+</html>
